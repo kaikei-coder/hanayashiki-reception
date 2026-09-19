@@ -675,77 +675,34 @@
   }
 
 
-  function onScanSuccess(
-    decodedText
-  ) {
+ function onScanSuccess(decodedText) {
 
-    const code =
-      String(
-        decodedText || ''
-      ).trim();
+  const code = String(decodedText || '').trim();
 
-
-    if (!code) {
-      return;
-    }
-
-
-    if (
-      code === currentCode
-    ) {
-      return;
-    }
-
-
-    currentCode =
-      code;
-
-
-    if (
-      navigator.vibrate
-    ) {
-
-      navigator.vibrate(
-        100
-      );
-    }
-
-
-    searchByQuery(
-      code
-    );
+  if (!code) {
+    return;
   }
 
+  console.log('QR読み取り成功:', code);
 
-  function searchParticipant() {
-
-    const query =
-      document
-        .getElementById(
-          'searchName'
-        )
-        .value
-        .trim();
-
-
-    if (!query) {
-
-      alert(
-        'お名前・フリガナ・受付番号を入力してください。'
-      );
-
-      return;
-    }
-
-
-    currentCode =
-      '';
-
-
-    searchByQuery(
-      query
-    );
+  if (navigator.vibrate) {
+    navigator.vibrate(150);
   }
+
+  // QRを読み取ったら、いったんカメラを停止
+  stopCamera();
+
+  // 読み取った内容を一旦画面に表示
+  document.getElementById('resultArea').innerHTML =
+    '<div class="card loading">' +
+    'QRコードを読み取りました。<br>' +
+    '<strong>' + escapeHtml(code) + '</strong><br><br>' +
+    '参加者情報を検索しています...' +
+    '</div>';
+
+  // 参加者検索
+  searchByQuery(code);
+}
 
 
   function searchByQuery(
