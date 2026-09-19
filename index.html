@@ -314,16 +314,12 @@
 
 <script>
 
-  // =====================================================
-  // 後でApps ScriptのWebアプリURLに差し替えます
-  // =====================================================
   const API_URL =
     'https://script.google.com/macros/s/AKfycbzKfmScR6u-vgwr7EURtx8pRFpYLgsNxpOWE426v9TiZXEr9xxYaiK7bZCpAz-fKMExlA/exec';
 
 
   let html5QrCode = null;
   let isScanning = false;
-  let currentCode = '';
 
 
   window.addEventListener(
@@ -366,26 +362,11 @@
     return String(
       value ?? ''
     )
-      .replace(
-        /&/g,
-        '&amp;'
-      )
-      .replace(
-        /</g,
-        '&lt;'
-      )
-      .replace(
-        />/g,
-        '&gt;'
-      )
-      .replace(
-        /"/g,
-        '&quot;'
-      )
-      .replace(
-        /'/g,
-        '&#039;'
-      );
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
   }
 
 
@@ -454,26 +435,6 @@
       staff: staff,
       pin: pin
     };
-  }
-
-
-  function checkApiUrl() {
-
-    if (
-      !API_URL ||
-      API_URL.includes(
-        'PASTE_APPS_SCRIPT'
-      )
-    ) {
-
-      alert(
-        'まだGoogle Apps Scriptとの接続設定が完了していません。'
-      );
-
-      return false;
-    }
-
-    return true;
   }
 
 
@@ -594,34 +555,10 @@
         'none';
 
 
-      const message =
-        String(err || '');
-
-
-      if (
-        message.includes(
-          'NotAllowedError'
-        ) ||
-        message.includes(
-          'Permission denied'
-        )
-      ) {
-
-        alert(
-          'カメラの利用がブラウザで拒否されています。\n\n' +
-          'Safari / Chrome のサイト設定で、このページの「カメラ」を「許可」にしてください。\n\n' +
-          '詳細: ' +
-          message
-        );
-
-      } else {
-
-        alert(
-          'カメラの起動に失敗しました。\n\n' +
-          message
-        );
-
-      }
+      alert(
+        'カメラの起動に失敗しました。\n\n' +
+        String(err)
+      );
 
     }
   }
@@ -675,44 +612,102 @@
   }
 
 
- function onScanSuccess(decodedText) {
+  async function onScanSuccess(
+    decodedText
+  ) {
 
-  const code = String(decodedText || '').trim();
+    const code =
+      String(
+        decodedText || ''
+      ).trim();
 
-  if (!code) {
-    return;
+
+    if (!code) {
+      return;
+    }
+
+
+    console.log(
+      'QR読み取り成功:',
+      code
+    );
+
+
+    if (
+      navigator.vibrate
+    ) {
+
+      navigator.vibrate(
+        150
+      );
+
+    }
+
+
+    await stopCamera();
+
+
+    document
+      .getElementById(
+        'resultArea'
+      )
+      .innerHTML =
+
+      '<div class="card loading">' +
+
+      'QRコードを読み取りました。<br><br>' +
+
+      '<strong>' +
+
+      escapeHtml(
+        code
+      ) +
+
+      '</strong>' +
+
+      '<br><br>' +
+
+      '参加者情報を検索しています...' +
+
+      '</div>';
+
+
+    searchByQuery(
+      code
+    );
   }
 
-  console.log('QR読み取り成功:', code);
 
-  if (navigator.vibrate) {
-    navigator.vibrate(150);
+  function searchParticipant() {
+
+    const query =
+      document
+        .getElementById(
+          'searchName'
+        )
+        .value
+        .trim();
+
+
+    if (!query) {
+
+      alert(
+        'お名前・フリガナ・受付番号を入力してください。'
+      );
+
+      return;
+    }
+
+
+    searchByQuery(
+      query
+    );
   }
-
-  // QRを読み取ったら、いったんカメラを停止
-  stopCamera();
-
-  // 読み取った内容を一旦画面に表示
-  document.getElementById('resultArea').innerHTML =
-    '<div class="card loading">' +
-    'QRコードを読み取りました。<br>' +
-    '<strong>' + escapeHtml(code) + '</strong><br><br>' +
-    '参加者情報を検索しています...' +
-    '</div>';
-
-  // 参加者検索
-  searchByQuery(code);
-}
 
 
   function searchByQuery(
     query
   ) {
-
-    if (!checkApiUrl()) {
-      return;
-    }
-
 
     const staffInfo =
       getStaffInfo();
@@ -1098,12 +1093,6 @@
     data
   ) {
 
-    currentCode =
-      String(
-        data.code || ''
-      );
-
-
     let status =
       '';
 
@@ -1301,11 +1290,6 @@
     code
   ) {
 
-    if (!checkApiUrl()) {
-      return;
-    }
-
-
     const staffInfo =
       getStaffInfo();
 
@@ -1432,9 +1416,6 @@
             '</div>';
         }
 
-
-        currentCode =
-          '';
       }
     );
   }
