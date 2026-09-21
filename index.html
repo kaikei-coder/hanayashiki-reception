@@ -1,823 +1,2011 @@
 <!DOCTYPE html>
+
 <html lang="ja">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    content="width=device-width, initial-scale=1.0"
   >
 
-  <title>花やしき受付</title>
+  <title>
+    花やしき受付
+  </title>
 
-  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
+  <script
+    src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js">
+  </script>
+
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
 
     body {
+
       margin: 0;
-      padding: 12px;
-      background: #f0f2f5;
-      color: #222;
+      padding: 0;
+
       font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
-        "Hiragino Kaku Gothic ProN",
-        "Yu Gothic",
         sans-serif;
+
+      background:
+        #f5f5f5;
+
+      color:
+        #222;
+
     }
+
 
     .container {
-      max-width: 680px;
-      margin: 0 auto;
+
+      max-width:
+        700px;
+
+      margin:
+        0 auto;
+
+      padding:
+        16px;
+
     }
 
-    .card {
-      background: #fff;
-      padding: 16px;
-      margin-bottom: 12px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
 
     h1 {
-      margin: 0 0 16px;
-      font-size: 24px;
+
+      text-align:
+        center;
+
+      font-size:
+        24px;
+
+      margin-bottom:
+        20px;
+
     }
 
-    h2 {
-      margin: 0 0 10px;
+
+    .box {
+
+      background:
+        white;
+
+      border-radius:
+        12px;
+
+      padding:
+        16px;
+
+      margin-bottom:
+        16px;
+
+      box-shadow:
+        0 2px 8px
+        rgba(0,0,0,0.08);
+
     }
+
 
     label {
-      display: block;
-      margin: 10px 0 6px;
-      font-size: 14px;
-      font-weight: 700;
+
+      display:
+        block;
+
+      font-weight:
+        bold;
+
+      margin-top:
+        12px;
+
+      margin-bottom:
+        5px;
+
     }
 
-    input {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background: #fff;
+
+    input,
+    textarea,
+    button {
+
+      box-sizing:
+        border-box;
+
+      width:
+        100%;
+
+      font-size:
+        16px;
+
     }
+
+
+    input,
+    textarea {
+
+      padding:
+        12px;
+
+      border:
+        1px solid #ccc;
+
+      border-radius:
+        8px;
+
+    }
+
 
     button {
-      border: 0;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
+
+      border:
+        none;
+
+      border-radius:
+        9px;
+
+      padding:
+        14px;
+
+      font-weight:
+        bold;
+
+      cursor:
+        pointer;
+
+      margin-top:
+        10px;
+
     }
 
-    .btn {
-      width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      color: #fff;
+
+    .primary {
+
+      background:
+        #222;
+
+      color:
+        white;
+
     }
 
-    .btn-camera {
-      background: #0d6efd;
+
+    .secondary {
+
+      background:
+        #e8e8e8;
+
+      color:
+        #222;
+
     }
 
-    .btn-checkin {
-      background: #198754;
-      font-size: 18px;
+
+    .success {
+
+      background:
+        #198754;
+
+      color:
+        white;
+
     }
 
-    .btn-unpaid {
-      background: #dc3545;
-      font-size: 18px;
+
+    .status {
+
+      padding:
+        12px;
+
+      border-radius:
+        8px;
+
+      margin:
+        10px 0;
+
+      font-weight:
+        bold;
+
     }
 
-    .search-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .search-row input {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .btn-search {
-      min-width: 80px;
-      padding: 0 15px;
-      color: #fff;
-      background: #6c757d;
-    }
-
-    #reader {
-      display: none;
-      width: 100%;
-      margin-top: 12px;
-      overflow: hidden;
-      border-radius: 10px;
-      background: #000;
-    }
-
-    .hint {
-      margin-top: 8px;
-      color: #666;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .result-box {
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 8px;
-      font-weight: 700;
-    }
 
     .paid {
-      color: #0f5132;
-      background: #d1e7dd;
+
+      background:
+        #e5f6ec;
+
+      color:
+        #126a3b;
+
     }
+
 
     .unpaid {
-      color: #842029;
-      background: #f8d7da;
+
+      background:
+        #fde7e7;
+
+      color:
+        #a41313;
+
     }
 
-    .checked {
-      color: #664d03;
-      background: #fff3cd;
+
+    .cancelled {
+
+      background:
+        #fde7e7;
+
+      color:
+        #a41313;
+
     }
 
-    .error {
-      color: #842029;
-      background: #f8d7da;
-      border: 1px solid #f5c2c7;
+
+    .partial {
+
+      background:
+        #fff5d7;
+
+      color:
+        #755300;
+
     }
 
-    .loading {
-      text-align: center;
-      color: #555;
+
+    .over {
+
+      background:
+        #ffecd5;
+
+      color:
+        #914600;
+
     }
 
-    .item-card {
-      margin-bottom: 10px;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      background: #fafafa;
+
+    .complete {
+
+      background:
+        #e5f6ec;
+
+      color:
+        #126a3b;
+
     }
 
-    .item-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: flex-start;
+
+    .result-card {
+
+      background:
+        white;
+
+      border:
+        2px solid #ddd;
+
+      border-radius:
+        12px;
+
+      padding:
+        16px;
+
+      margin-bottom:
+        16px;
+
     }
 
-    .person-name {
-      font-size: 18px;
-      font-weight: 700;
+
+    .name {
+
+      font-size:
+        23px;
+
+      font-weight:
+        bold;
+
+      margin-bottom:
+        8px;
+
     }
 
-    .badge {
-      display: inline-block;
-      padding: 3px 7px;
-      border-radius: 5px;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-
-    .badge-paid {
-      color: #0f5132;
-      background: #d1e7dd;
-    }
-
-    .badge-unpaid {
-      color: #842029;
-      background: #f8d7da;
-    }
-
-    .badge-checked {
-      color: #664d03;
-      background: #fff3cd;
-    }
-
-    .detail {
-      margin-top: 8px;
-      color: #555;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .select-btn {
-      width: 100%;
-      margin-top: 8px;
-      padding: 10px;
-      color: #fff;
-      background: #0d6efd;
-    }
 
     .small {
-      font-size: 12px;
-      font-weight: 400;
+
+      font-size:
+        13px;
+
+      color:
+        #666;
+
     }
+
+
+    .section-title {
+
+      font-weight:
+        bold;
+
+      margin-top:
+        18px;
+
+      margin-bottom:
+        7px;
+
+    }
+
+
+    .count-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap:
+        7px;
+
+    }
+
+
+    .count-box {
+
+      background:
+        #f5f5f5;
+
+      border-radius:
+        8px;
+
+      padding:
+        10px 5px;
+
+      text-align:
+        center;
+
+      font-size:
+        13px;
+
+    }
+
+
+    .count-number {
+
+      font-size:
+        23px;
+
+      font-weight:
+        bold;
+
+      margin-top:
+        3px;
+
+    }
+
+
+    .entry-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap:
+        8px;
+
+    }
+
+
+    .entry-grid label {
+
+      font-size:
+        13px;
+
+      text-align:
+        center;
+
+    }
+
+
+    #reader {
+
+      width:
+        100%;
+
+      margin-top:
+        12px;
+
+    }
+
+
+    .message {
+
+      text-align:
+        center;
+
+      padding:
+        12px;
+
+      font-weight:
+        bold;
+
+    }
+
+
+    hr {
+
+      border:
+        none;
+
+      border-top:
+        1px solid #ddd;
+
+      margin:
+        18px 0;
+
+    }
+
+
+    @media
+    (max-width: 480px) {
+
+      .count-box {
+
+        font-size:
+          12px;
+
+      }
+
+
+      .count-number {
+
+        font-size:
+          21px;
+
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
-  <div class="card">
 
-    <h1>花やしき受付</h1>
+  <h1>
+    花やしき 当日受付
+  </h1>
 
-    <label for="staffName">
-      担当スタッフ名
+
+  <!-- ======================================================
+       スタッフ情報
+       ====================================================== -->
+
+  <div class="box">
+
+    <label for="staff">
+      受付担当者
     </label>
 
+
     <input
-      id="staffName"
+      id="staff"
       type="text"
-      placeholder="例：石橋"
-      autocomplete="name"
+      placeholder="例：張﨑"
     >
 
-    <label for="staffPin">
-      スタッフ用暗証番号
+
+    <label for="pin">
+      スタッフPIN
     </label>
 
+
     <input
-      id="staffPin"
+      id="pin"
       type="password"
       inputmode="numeric"
-      placeholder="スタッフ用PIN"
+      placeholder="PINを入力"
     >
 
+  </div>
+
+
+  <!-- ======================================================
+       QR
+       ====================================================== -->
+
+  <div class="box">
+
     <button
-      id="cameraBtn"
-      class="btn btn-camera"
-      type="button"
-      onclick="toggleCamera()"
+      class="primary"
+      onclick="startCamera()"
     >
-      📷 カメラを起動する
+      QRコードを読み取る
     </button>
+
+
+    <button
+      class="secondary"
+      onclick="stopCamera()"
+    >
+      カメラを停止
+    </button>
+
 
     <div id="reader"></div>
 
-    <div class="hint">
-      カメラ起動だけなら暗証番号は不要です。
-      初回はブラウザからカメラ利用の確認が表示されますので、
-      「許可」を選んでください。
-    </div>
-
   </div>
 
 
-  <div class="card">
+  <!-- ======================================================
+       手動検索
+       ====================================================== -->
 
-    <label for="searchName">
-      お名前・フリガナ・受付番号で検索
+  <div class="box">
+
+    <label for="searchInput">
+      QRコードがない場合
     </label>
 
-    <div class="search-row">
 
-      <input
-        id="searchName"
-        type="text"
-        placeholder="例：石橋 / いしばし / 領花2026-001"
-        enterkeyhint="search"
-      >
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="氏名・フリガナ・受付番号"
+    >
 
-      <button
-        class="btn-search"
-        type="button"
-        onclick="searchParticipant()"
-      >
-        検索
-      </button>
 
-    </div>
+    <button
+      class="primary"
+      onclick="manualSearch()"
+    >
+      検索
+    </button>
 
   </div>
 
 
-  <div id="resultArea"></div>
+  <div
+    id="message"
+    class="message"
+  ></div>
+
+
+  <div id="results"></div>
+
 
 </div>
 
 
 <script>
 
-  const API_URL =
-    'https://script.google.com/macros/s/AKfycbzKfmScR6u-vgwr7EURtx8pRFpYLgsNxpOWE426v9TiZXEr9xxYaiK7bZCpAz-fKMExlA/exec';
+// ============================================================
+// Apps Script WebアプリURL
+// ============================================================
+
+const API_URL =
+  'https://script.google.com/macros/s/AKfycbzKfmScR6u-vgwr7EURtx8pRFpYLgsNxpOWE426v9TiZXEr9xxYaiK7bZCpAz-fKMExlA/exec';
 
 
-  let html5QrCode = null;
-  let isScanning = false;
+let html5QrCode = null;
+
+let cameraRunning = false;
 
 
-  window.addEventListener(
-    'load',
-    function () {
-
-      const savedStaff =
-        localStorage.getItem(
-          'hanayashikiStaffName'
-        );
-
-      if (savedStaff) {
-        document.getElementById(
-          'staffName'
-        ).value = savedStaff;
-      }
+// 検索結果を一時保存
+const participantCache = {};
 
 
-      document
-        .getElementById(
-          'searchName'
-        )
-        .addEventListener(
-          'keydown',
-          function (e) {
+// ============================================================
+// スタッフ情報
+// ============================================================
 
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              searchParticipant();
-            }
+function getStaffInfo() {
 
-          }
-        );
-    }
+  const staff =
+    document
+      .getElementById(
+        'staff'
+      )
+      .value
+      .trim();
+
+
+  const pin =
+    document
+      .getElementById(
+        'pin'
+      )
+      .value
+      .trim();
+
+
+  if (!staff) {
+
+    alert(
+      '受付担当者名を入力してください。'
+    );
+
+    return null;
+
+  }
+
+
+  if (!pin) {
+
+    alert(
+      'スタッフPINを入力してください。'
+    );
+
+    return null;
+
+  }
+
+
+  return {
+
+    staff:
+      staff,
+
+    pin:
+      pin
+
+  };
+
+}
+
+
+// ============================================================
+// QRカメラ開始
+// ============================================================
+
+async function startCamera() {
+
+  const info =
+    getStaffInfo();
+
+
+  if (!info) {
+
+    return;
+
+  }
+
+
+  if (
+    cameraRunning
+  ) {
+
+    return;
+
+  }
+
+
+  try {
+
+    html5QrCode =
+      new Html5Qrcode(
+        'reader'
+      );
+
+
+    await html5QrCode.start(
+
+      {
+        facingMode:
+          'environment'
+      },
+
+      {
+        fps:
+          10,
+
+        qrbox: {
+
+          width:
+            250,
+
+          height:
+            250
+
+        }
+      },
+
+      onScanSuccess
+
+    );
+
+
+    cameraRunning =
+      true;
+
+
+    showMessage(
+      'QRコードをカメラにかざしてください。'
+    );
+
+
+  } catch (err) {
+
+    cameraRunning =
+      false;
+
+
+    alert(
+      'カメラを開始できませんでした。\n' +
+      err
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// カメラ停止
+// ============================================================
+
+async function stopCamera() {
+
+  if (
+    !html5QrCode ||
+    !cameraRunning
+  ) {
+
+    return;
+
+  }
+
+
+  try {
+
+    await html5QrCode.stop();
+
+  } catch (e) {}
+
+
+  cameraRunning =
+    false;
+
+}
+
+
+// ============================================================
+// QR読取成功
+// ============================================================
+
+async function onScanSuccess(
+  decodedText
+) {
+
+  await stopCamera();
+
+
+  showMessage(
+    'QRコードを読み取りました。参加者情報を検索しています。'
   );
 
 
-  function escapeHtml(value) {
+  searchParticipant(
+    decodedText
+  );
 
-    return String(
-      value ?? ''
-    )
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
+}
+
+
+// ============================================================
+// 手動検索
+// ============================================================
+
+function manualSearch() {
+
+  const info =
+    getStaffInfo();
+
+
+  if (!info) {
+
+    return;
+
   }
 
 
-  function getStaffNameOnly() {
-
-    const staff =
-      document
-        .getElementById(
-          'staffName'
-        )
-        .value
-        .trim();
+  const query =
+    document
+      .getElementById(
+        'searchInput'
+      )
+      .value
+      .trim();
 
 
-    if (!staff) {
+  if (!query) {
 
-      alert(
-        '担当スタッフ名を入力してください。'
-      );
-
-      return null;
-    }
-
-
-    localStorage.setItem(
-      'hanayashikiStaffName',
-      staff
+    alert(
+      '氏名・フリガナ・受付番号を入力してください。'
     );
 
+    return;
 
-    return staff;
   }
 
 
-  function getStaffInfo() {
+  searchParticipant(
+    query
+  );
 
-    const staff =
-      getStaffNameOnly();
-
-
-    if (!staff) {
-      return null;
-    }
+}
 
 
-    const pin =
-      document
-        .getElementById(
-          'staffPin'
-        )
-        .value
-        .trim();
+// ============================================================
+// 参加者検索
+// ============================================================
+
+function searchParticipant(
+  query
+) {
+
+  const info =
+    getStaffInfo();
 
 
-    if (!pin) {
+  if (!info) {
 
-      alert(
-        'スタッフ用暗証番号を入力してください。'
-      );
+    return;
 
-      return null;
-    }
-
-
-    return {
-      staff: staff,
-      pin: pin
-    };
   }
 
 
-  async function toggleCamera() {
-
-    const staff =
-      getStaffNameOnly();
-
-
-    if (!staff) {
-      return;
-    }
+  document
+    .getElementById(
+      'results'
+    )
+    .innerHTML =
+      '';
 
 
-    if (isScanning) {
-
-      await stopCamera();
-
-      return;
-    }
+  showMessage(
+    '検索中...'
+  );
 
 
-    if (
-      typeof Html5Qrcode ===
-      'undefined'
-    ) {
+  jsonp(
 
-      alert(
-        'QRコード読み取り機能の読み込みに失敗しました。ページを再読み込みしてください。'
-      );
+    {
 
-      return;
-    }
+      action:
+        'search',
 
+      query:
+        query,
 
-    const reader =
-      document.getElementById(
-        'reader'
-      );
+      pin:
+        info.pin
 
-    reader.style.display =
-      'block';
+    },
 
 
-    try {
+    function(data) {
 
-      html5QrCode =
-        new Html5Qrcode(
-          'reader'
+      if (!data.ok) {
+
+        showMessage(
+          data.message ||
+          '検索に失敗しました。'
         );
 
-
-      await html5QrCode.start(
-
-        {
-          facingMode:
-            'environment'
-        },
-
-        {
-          fps: 10,
-
-          qrbox: function (
-            width,
-            height
-          ) {
-
-            const min =
-              Math.min(
-                width,
-                height
-              );
-
-            const size =
-              Math.floor(
-                Math.min(
-                  260,
-                  min * 0.8
-                )
-              );
-
-            return {
-              width: size,
-              height: size
-            };
-          }
-        },
-
-        onScanSuccess,
-
-        function () {
-        }
-
-      );
-
-
-      isScanning =
-        true;
-
-
-      const btn =
-        document.getElementById(
-          'cameraBtn'
-        );
-
-
-      btn.textContent =
-        '⏹️ カメラを停止する';
-
-
-      btn.style.background =
-        '#6c757d';
-
-
-    } catch (err) {
-
-      reader.style.display =
-        'none';
-
-
-      alert(
-        'カメラの起動に失敗しました。\n\n' +
-        String(err)
-      );
-
-    }
-  }
-
-
-  async function stopCamera() {
-
-    try {
-
-      if (
-        html5QrCode &&
-        isScanning
-      ) {
-
-        await html5QrCode.stop();
+        return;
 
       }
 
-    } catch (e) {
 
-      console.error(e);
+      if (
+        !data.results ||
+        data.results.length === 0
+      ) {
 
-    }
+        showMessage(
+          '該当する申込者が見つかりません。'
+        );
 
+        return;
 
-    isScanning =
-      false;
-
-
-    document
-      .getElementById(
-        'reader'
-      )
-      .style
-      .display =
-      'none';
+      }
 
 
-    const btn =
-      document.getElementById(
-        'cameraBtn'
+      showMessage(
+        ''
       );
 
 
-    btn.textContent =
-      '📷 カメラを起動する';
-
-
-    btn.style.background =
-      '#0d6efd';
-  }
-
-
-  async function onScanSuccess(
-    decodedText
-  ) {
-
-    const code =
-      String(
-        decodedText || ''
-      ).trim();
-
-
-    if (!code) {
-      return;
-    }
-
-
-    console.log(
-      'QR読み取り成功:',
-      code
-    );
-
-
-    if (
-      navigator.vibrate
-    ) {
-
-      navigator.vibrate(
-        150
+      renderResults(
+        data.results
       );
 
     }
 
+  );
 
-    await stopCamera();
+}
 
 
+// ============================================================
+// 検索結果表示
+// ============================================================
+
+function renderResults(
+  results
+) {
+
+  const area =
     document
       .getElementById(
-        'resultArea'
-      )
-      .innerHTML =
-
-      '<div class="card loading">' +
-
-      'QRコードを読み取りました。<br><br>' +
-
-      '<strong>' +
-
-      escapeHtml(
-        code
-      ) +
-
-      '</strong>' +
-
-      '<br><br>' +
-
-      '参加者情報を検索しています...' +
-
-      '</div>';
+        'results'
+      );
 
 
-    searchByQuery(
+  area.innerHTML =
+    '';
+
+
+  results.forEach(
+    function(p) {
+
+      participantCache[p.code] =
+        p;
+
+
+      const card =
+        document.createElement(
+          'div'
+        );
+
+
+      card.className =
+        'result-card';
+
+
+      // ====================================================
+      // 入金状況
+      // ====================================================
+
+      let paymentHtml =
+        '';
+
+
+      if (
+        p.paymentStatus ===
+        '済'
+      ) {
+
+        paymentHtml =
+          `
+          <div class="status paid">
+            🟢 入金済
+          </div>
+          `;
+
+      }
+
+      else if (
+        p.paymentStatus ===
+        'キャンセル'
+      ) {
+
+        paymentHtml =
+          `
+          <div class="status cancelled">
+            🔴 キャンセル
+          </div>
+          `;
+
+      }
+
+      else {
+
+        paymentHtml =
+          `
+          <div class="status unpaid">
+
+            🔴 未入金
+
+            <br>
+
+            お支払総額：
+            ￥${escapeHtml(
+              p.totalAmount
+            )}
+
+          </div>
+          `;
+
+      }
+
+
+      // ====================================================
+      // 受付状況
+      // ====================================================
+
+      let receptionClass =
+        'partial';
+
+
+      if (
+        p.overAdult > 0 ||
+        p.overElementary > 0 ||
+        p.overPreschool > 0
+      ) {
+
+        receptionClass =
+          'over';
+
+      }
+
+      else if (
+        p.receptionStatus ===
+        '全員受付済'
+      ) {
+
+        receptionClass =
+          'complete';
+
+      }
+
+
+      const safeCode =
+        escapeHtml(
+          p.code
+        );
+
+
+      card.innerHTML =
+        `
+
+        <div class="name">
+          ${escapeHtml(
+            p.name
+          )} 様
+        </div>
+
+
+        <div class="small">
+          受付番号：
+          ${safeCode}
+        </div>
+
+
+        ${paymentHtml}
+
+
+        <div
+          class="status ${receptionClass}"
+        >
+
+          ${escapeHtml(
+            p.receptionStatus
+          )}
+
+        </div>
+
+
+        <!-- ================================================
+             申込人数
+             ================================================ -->
+
+        <div class="section-title">
+          申込人数
+        </div>
+
+
+        <div class="count-grid">
+
+          <div class="count-box">
+
+            大人
+
+            <div class="count-number">
+              ${p.appliedAdult}
+            </div>
+
+          </div>
+
+
+          <div class="count-box">
+
+            小学生
+
+            <div class="count-number">
+              ${p.appliedElementary}
+            </div>
+
+          </div>
+
+
+          <div class="count-box">
+
+            未就学児
+
+            <div class="count-number">
+              ${p.appliedPreschool}
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================
+             現在までの来場
+             ================================================ -->
+
+        <div class="section-title">
+          現在までの来場
+        </div>
+
+
+        <div class="count-grid">
+
+          <div class="count-box">
+
+            大人
+
+            <div class="count-number">
+              ${p.checkedAdult}
+            </div>
+
+          </div>
+
+
+          <div class="count-box">
+
+            小学生
+
+            <div class="count-number">
+              ${p.checkedElementary}
+            </div>
+
+          </div>
+
+
+          <div class="count-box">
+
+            未就学児
+
+            <div class="count-number">
+              ${p.checkedPreschool}
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================
+             残人数
+             ================================================ -->
+
+        <div class="section-title">
+          申込残数
+        </div>
+
+
+        <div class="count-grid">
+
+          <div class="count-box">
+
+            大人
+
+            <div class="count-number">
+              ${p.remainingAdult}
+            </div>
+
+          </div>
+
+
+          <div class="count-box">
+
+            小学生
+
+            <div class="count-number">
+              ${p.remainingElementary}
+            </div>
+
+          </div>
+
+
+          <div class="count-box">
+
+            未就学児
+
+            <div class="count-number">
+              ${p.remainingPreschool}
+            </div>
+
+          </div>
+
+        </div>
+
+
+        ${
+          (
+            p.overAdult > 0 ||
+            p.overElementary > 0 ||
+            p.overPreschool > 0
+          )
+          ?
+          `
+
+          <div class="status over">
+
+            ⚠️ 現在の超過人数
+
+            <br>
+
+            大人：
+            ${p.overAdult}名
+
+            ／
+
+            小学生：
+            ${p.overElementary}名
+
+            ／
+
+            未就学児：
+            ${p.overPreschool}名
+
+          </div>
+
+          `
+          :
+          ''
+        }
+
+
+        ${
+          p.paymentStatus ===
+          'キャンセル'
+
+          ?
+
+          `
+
+          <div class="status cancelled">
+
+            キャンセル申込のため、
+            受付できません。
+
+          </div>
+
+          `
+
+          :
+
+          `
+
+          <hr>
+
+
+          <!-- ==============================================
+               今回来場人数
+               ============================================== -->
+
+          <div class="section-title">
+            今回来場した人数
+          </div>
+
+
+          <div class="entry-grid">
+
+
+            <div>
+
+              <label>
+                大人
+              </label>
+
+              <input
+
+                id="adult_${safeCode}"
+
+                type="number"
+
+                min="0"
+
+                max="50"
+
+                value="0"
+
+                inputmode="numeric"
+
+              >
+
+            </div>
+
+
+            <div>
+
+              <label>
+                小学生
+              </label>
+
+              <input
+
+                id="elementary_${safeCode}"
+
+                type="number"
+
+                min="0"
+
+                max="50"
+
+                value="0"
+
+                inputmode="numeric"
+
+              >
+
+            </div>
+
+
+            <div>
+
+              <label>
+                未就学児
+              </label>
+
+              <input
+
+                id="preschool_${safeCode}"
+
+                type="number"
+
+                min="0"
+
+                max="50"
+
+                value="0"
+
+                inputmode="numeric"
+
+              >
+
+            </div>
+
+
+          </div>
+
+
+          <label>
+            備考（任意）
+          </label>
+
+
+          <input
+
+            id="note_${safeCode}"
+
+            type="text"
+
+            placeholder="例：同行者2名は後から来場"
+
+          >
+
+
+          <button
+
+            class="success"
+
+            onclick="prepareCheckin(
+              '${safeCode}'
+            )"
+
+          >
+
+            今回分を受付する
+
+          </button>
+
+          `
+        }
+
+      `;
+
+
+      area.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+// ============================================================
+// 受付前準備
+// ============================================================
+
+function prepareCheckin(
+  code
+) {
+
+  const participant =
+    participantCache[
       code
+    ];
+
+
+  if (!participant) {
+
+    alert(
+      '参加者情報を取得できません。'
     );
+
+    return;
+
   }
 
 
-  function searchParticipant() {
-
-    const query =
+  const adult =
+    Number(
       document
         .getElementById(
-          'searchName'
+          'adult_' +
+          code
         )
-        .value
-        .trim();
-
-
-    if (!query) {
-
-      alert(
-        'お名前・フリガナ・受付番号を入力してください。'
-      );
-
-      return;
-    }
-
-
-    searchByQuery(
-      query
+        .value ||
+      0
     );
+
+
+  const elementary =
+    Number(
+      document
+        .getElementById(
+          'elementary_' +
+          code
+        )
+        .value ||
+      0
+    );
+
+
+  const preschool =
+    Number(
+      document
+        .getElementById(
+          'preschool_' +
+          code
+        )
+        .value ||
+      0
+    );
+
+
+  const note =
+    document
+      .getElementById(
+        'note_' +
+        code
+      )
+      .value
+      .trim();
+
+
+  // ========================================================
+  // 入力チェック
+  // ========================================================
+
+  if (
+    adult === 0 &&
+    elementary === 0 &&
+    preschool === 0
+  ) {
+
+    alert(
+      '今回入場する人数を入力してください。'
+    );
+
+    return;
+
   }
 
 
-  function searchByQuery(
-    query
+  const counts =
+    [
+      adult,
+      elementary,
+      preschool
+    ];
+
+
+  for (
+    let i = 0;
+    i < counts.length;
+    i++
   ) {
 
-    const staffInfo =
-      getStaffInfo();
+    if (
+      counts[i] < 0 ||
+      !Number.isInteger(
+        counts[i]
+      )
+    ) {
 
+      alert(
+        '人数は0以上の整数で入力してください。'
+      );
 
-    if (!staffInfo) {
       return;
+
     }
 
-
-    showLoading(
-      '検索中...'
-    );
+  }
 
 
-    jsonpRequest(
-      {
-        action:
-          'search',
+  executeCheckin(
 
-        query:
-          query,
+    participant,
 
-        pin:
-          staffInfo.pin
-      },
+    adult,
 
-      function (response) {
+    elementary,
 
+    preschool,
+
+    note,
+
+    false,
+
+    false
+
+  );
+
+}
+
+
+// ============================================================
+// Apps Scriptへ受付登録
+// ============================================================
+
+function executeCheckin(
+  participant,
+  adult,
+  elementary,
+  preschool,
+  note,
+  confirmUnpaid,
+  confirmOver
+) {
+
+  const info =
+    getStaffInfo();
+
+
+  if (!info) {
+
+    return;
+
+  }
+
+
+  showMessage(
+    '受付を登録しています...'
+  );
+
+
+  jsonp(
+
+    {
+
+      action:
+        'checkin',
+
+      code:
+        participant.code,
+
+      staff:
+        info.staff,
+
+      pin:
+        info.pin,
+
+      adult:
+        adult,
+
+      elementary:
+        elementary,
+
+      preschool:
+        preschool,
+
+      note:
+        note,
+
+      confirmUnpaid:
+        confirmUnpaid
+          ? 1
+          : 0,
+
+      confirmOver:
+        confirmOver
+          ? 1
+          : 0
+
+    },
+
+
+    function(data) {
+
+      // ====================================================
+      // 未入金／超過の確認
+      // ====================================================
+
+      if (
+        data.requiresConfirmation
+      ) {
+
+        let msg =
+          '確認してください。\n\n';
+
+
+        // 未入金
         if (
-          !response ||
-          response.ok !== true
+          data.unpaid
         ) {
 
-          showError(
-            response &&
-            response.message
-              ? response.message
-              : '検索に失敗しました。'
+          msg +=
+            '【未入金】\n';
+
+
+          msg +=
+            '入金状況：' +
+            (
+              data.paymentStatus ||
+              '未入金'
+            ) +
+            '\n';
+
+
+          msg +=
+            'お支払総額：￥' +
+            data.totalAmount +
+            '\n\n';
+
+        }
+
+
+        // 超過
+        if (
+          data.newOver
+        ) {
+
+          msg +=
+            '【申込人数を超過します】\n';
+
+
+          if (
+            data.thisOverAdult > 0
+          ) {
+
+            msg +=
+              '大人：' +
+              data.thisOverAdult +
+              '名超過\n';
+
+          }
+
+
+          if (
+            data.thisOverElementary > 0
+          ) {
+
+            msg +=
+              '小学生：' +
+              data.thisOverElementary +
+              '名超過\n';
+
+          }
+
+
+          if (
+            data.thisOverPreschool > 0
+          ) {
+
+            msg +=
+              '未就学児：' +
+              data.thisOverPreschool +
+              '名超過\n';
+
+          }
+
+
+          msg +=
+            '\n';
+
+        }
+
+
+        msg +=
+          'この内容で受付しますか？';
+
+
+        const confirmed =
+          window.confirm(
+            msg
+          );
+
+
+        if (!confirmed) {
+
+          showMessage(
+            '受付をキャンセルしました。'
           );
 
           return;
+
         }
 
 
-        renderResults(
-          response.results || []
+        // 確認済みとして再送
+        executeCheckin(
+
+          participant,
+
+          adult,
+
+          elementary,
+
+          preschool,
+
+          note,
+
+          true,
+
+          true
+
         );
+
+
+        return;
+
       }
 
+
+      if (!data.ok) {
+
+        alert(
+          data.message ||
+          '受付に失敗しました。'
+        );
+
+
+        showMessage(
+          '受付できませんでした。'
+        );
+
+
+        return;
+
+      }
+
+
+      // ====================================================
+      // 完了表示
+      // ====================================================
+
+      let message =
+        '受付しました。\n\n' +
+        data.name +
+        ' 様\n\n' +
+        '現在の来場累計\n' +
+        '大人：' +
+        data.checkedAdult +
+        '名\n' +
+        '小学生：' +
+        data.checkedElementary +
+        '名\n' +
+        '未就学児：' +
+        data.checkedPreschool +
+        '名';
+
+
+      if (
+        data.overAdult > 0 ||
+        data.overElementary > 0 ||
+        data.overPreschool > 0
+      ) {
+
+        message +=
+          '\n\n【超過】';
+
+
+        if (
+          data.overAdult > 0
+        ) {
+
+          message +=
+            '\n大人：' +
+            data.overAdult +
+            '名';
+
+        }
+
+
+        if (
+          data.overElementary > 0
+        ) {
+
+          message +=
+            '\n小学生：' +
+            data.overElementary +
+            '名';
+
+        }
+
+
+        if (
+          data.overPreschool > 0
+        ) {
+
+          message +=
+            '\n未就学児：' +
+            data.overPreschool +
+            '名';
+
+        }
+
+      }
+
+
+      alert(
+        message
+      );
+
+
+      showMessage(
+        '受付完了'
+      );
+
+
+      // 最新状態に更新
+      searchParticipant(
+        participant.code
+      );
+
+    }
+
+  );
+
+}
+
+
+// ============================================================
+// JSONP通信
+// ============================================================
+
+function jsonp(
+  params,
+  callback
+) {
+
+  const callbackName =
+    'jsonp_' +
+    Date.now() +
+    '_' +
+    Math.floor(
+      Math.random() *
+      100000
     );
-  }
 
 
-  function jsonpRequest(
-    params,
-    callback
-  ) {
-
-    const callbackName =
-      'jsonp_' +
-      Date.now() +
-      '_' +
-      Math.floor(
-        Math.random() *
-        100000
-      );
+  const script =
+    document.createElement(
+      'script'
+    );
 
 
-    params.callback =
-      callbackName;
+  window[
+    callbackName
+  ] =
+    function(data) {
 
-
-    const url =
-      API_URL +
-      '?' +
-      new URLSearchParams(
-        params
-      ).toString();
-
-
-    const script =
-      document.createElement(
-        'script'
-      );
-
-
-    let finished =
-      false;
-
-
-    window[
-      callbackName
-    ] =
-      function (data) {
-
-        finished =
-          true;
-
-
-        cleanup();
-
+      try {
 
         callback(
           data
         );
-      };
+
+      }
+
+      finally {
+
+        try {
+
+          delete window[
+            callbackName
+          ];
+
+        }
+
+        catch (e) {}
 
 
-    function cleanup() {
+        if (
+          script.parentNode
+        ) {
+
+          script.parentNode
+            .removeChild(
+              script
+            );
+
+        }
+
+      }
+
+    };
+
+
+  params.callback =
+    callbackName;
+
+
+  const query =
+    Object.keys(
+      params
+    )
+      .map(
+        function(key) {
+
+          return (
+
+            encodeURIComponent(
+              key
+            )
+
+            +
+
+            '='
+
+            +
+
+            encodeURIComponent(
+              params[key]
+            )
+
+          );
+
+        }
+      )
+      .join(
+        '&'
+      );
+
+
+  script.src =
+    API_URL +
+    '?' +
+    query;
+
+
+  script.onerror =
+    function() {
+
+      showMessage(
+        'サーバーとの通信に失敗しました。'
+      );
+
 
       try {
 
@@ -825,644 +2013,93 @@
           callbackName
         ];
 
-      } catch (e) {
       }
+
+      catch (e) {}
 
 
       if (
         script.parentNode
       ) {
 
-        script.parentNode.removeChild(
-          script
-        );
+        script.parentNode
+          .removeChild(
+            script
+          );
 
       }
 
-    }
+    };
 
 
-    script.onerror =
-      function () {
-
-        if (finished) {
-          return;
-        }
-
-
-        cleanup();
-
-
-        showError(
-          'Google Apps Scriptとの通信に失敗しました。'
-        );
-      };
-
-
-    setTimeout(
-      function () {
-
-        if (finished) {
-          return;
-        }
-
-
-        cleanup();
-
-
-        showError(
-          '通信がタイムアウトしました。もう一度お試しください。'
-        );
-
-      },
-      15000
-    );
-
-
-    script.src =
-      url;
-
-
-    document.body.appendChild(
+  document.body
+    .appendChild(
       script
     );
-  }
+
+}
 
 
-  function renderResults(
-    list
-  ) {
+// ============================================================
+// メッセージ表示
+// ============================================================
 
-    const area =
-      document.getElementById(
-        'resultArea'
-      );
+function showMessage(
+  text
+) {
 
+  document
+    .getElementById(
+      'message'
+    )
+    .textContent =
+      text || '';
 
-    if (
-      !Array.isArray(
-        list
-      ) ||
-      list.length === 0
-    ) {
-
-      area.innerHTML =
-        '<div class="card error">' +
-        '<strong>該当する参加者が見つかりません。</strong>' +
-        '</div>';
-
-      return;
-    }
+}
 
 
-    if (
-      list.length === 1
-    ) {
+// ============================================================
+// HTMLエスケープ
+// ============================================================
 
-      renderSingle(
-        list[0]
-      );
+function escapeHtml(
+  value
+) {
 
-      return;
-    }
+  return String(
+    value ?? ''
+  )
 
+    .replace(
+      /&/g,
+      '&amp;'
+    )
 
-    let html =
-      '<div class="card">' +
-      '<h2>該当者が ' +
-      list.length +
-      ' 件見つかりました</h2>';
+    .replace(
+      /</g,
+      '&lt;'
+    )
 
+    .replace(
+      />/g,
+      '&gt;'
+    )
 
-    list.forEach(
-      function (data) {
+    .replace(
+      /"/g,
+      '&quot;'
+    )
 
-        let badge =
-          '';
-
-
-        if (
-          data.checkinTime
-        ) {
-
-          badge =
-            '<span class="badge badge-checked">' +
-            '受付済 ' +
-            escapeHtml(
-              data.checkinTime
-            ) +
-            '</span>';
-
-        }
-
-        else if (
-          data.mStatus ===
-          '済'
-        ) {
-
-          badge =
-            '<span class="badge badge-paid">' +
-            '入金済' +
-            '</span>';
-
-        }
-
-        else {
-
-          badge =
-            '<span class="badge badge-unpaid">' +
-            '未入金' +
-            '</span>';
-
-        }
-
-
-        html +=
-
-          '<div class="item-card">' +
-
-          '<div class="item-top">' +
-
-          '<div class="person-name">' +
-
-          escapeHtml(
-            data.name
-          ) +
-
-          ' 様' +
-
-          (
-            data.kana
-              ?
-              ' (' +
-              escapeHtml(
-                data.kana
-              ) +
-              ')'
-              :
-              ''
-          ) +
-
-          '</div>' +
-
-          badge +
-
-          '</div>' +
-
-
-          '<div class="detail">' +
-
-          '受付番号：' +
-          escapeHtml(
-            data.code
-          ) +
-          '<br>' +
-
-          '大人：' +
-          escapeHtml(
-            data.adultCount
-          ) +
-          '名 / ' +
-
-          '小学生：' +
-          escapeHtml(
-            data.childCount
-          ) +
-          '名<br>' +
-
-          '請求額：￥' +
-          escapeHtml(
-            data.totalAmount
-          ) +
-          '-' +
-
-          '</div>' +
-
-
-          '<button ' +
-          'class="select-btn" ' +
-          'type="button" ' +
-          'data-code="' +
-          escapeHtml(
-            data.code
-          ) +
-          '">' +
-
-          'この方を選択して受付' +
-
-          '</button>' +
-
-          '</div>';
-
-      }
+    .replace(
+      /'/g,
+      '&#039;'
     );
 
-
-    html +=
-      '</div>';
-
-
-    area.innerHTML =
-      html;
-
-
-    area
-      .querySelectorAll(
-        '.select-btn'
-      )
-      .forEach(
-        function (button) {
-
-          button.addEventListener(
-            'click',
-            function () {
-
-              searchByQuery(
-                this.dataset.code
-              );
-
-            }
-          );
-
-        }
-      );
-  }
-
-
-  function renderSingle(
-    data
-  ) {
-
-    let status =
-      '';
-
-
-    let button =
-      '';
-
-
-    if (
-      data.checkinTime
-    ) {
-
-      status =
-
-        '<div class="result-box checked">' +
-
-        '⚠️ 既に受付済みです<br>' +
-
-        '受付時刻：' +
-
-        escapeHtml(
-          data.checkinTime
-        ) +
-
-        '</div>';
-
-    }
-
-    else if (
-      data.mStatus ===
-      '済'
-    ) {
-
-      status =
-
-        '<div class="result-box paid">' +
-
-        '✅ 入金済み（受付OK）' +
-
-        '</div>';
-
-
-      button =
-
-        '<button ' +
-        'id="checkinBtn" ' +
-        'class="btn btn-checkin" ' +
-        'type="button">' +
-
-        '受付を確定する' +
-
-        '</button>';
-
-    }
-
-    else {
-
-      status =
-
-        '<div class="result-box unpaid">' +
-
-        '⚠️ 未入金です<br>' +
-
-        'お支払額：￥' +
-
-        escapeHtml(
-          data.totalAmount
-        ) +
-
-        '-<br>' +
-
-        '<span class="small">' +
-
-        '後日振込をご案内してから受付してください。' +
-
-        '</span>' +
-
-        '</div>';
-
-
-      button =
-
-        '<button ' +
-        'id="checkinBtn" ' +
-        'class="btn btn-unpaid" ' +
-        'type="button">' +
-
-        '振込案内完了 ＆ 受付確定' +
-
-        '</button>';
-    }
-
-
-    document
-      .getElementById(
-        'resultArea'
-      )
-      .innerHTML =
-
-      '<div class="card">' +
-
-      '<h2>' +
-
-      escapeHtml(
-        data.name
-      ) +
-
-      ' 様' +
-
-      (
-        data.kana
-          ?
-          ' (' +
-          escapeHtml(
-            data.kana
-          ) +
-          ')'
-          :
-          ''
-      ) +
-
-      '</h2>' +
-
-
-      '<div class="detail">' +
-
-      '<strong>受付番号：</strong>' +
-
-      escapeHtml(
-        data.code
-      ) +
-
-      '<br>' +
-
-
-      '<strong>内訳：</strong>' +
-
-      '大人 ' +
-
-      escapeHtml(
-        data.adultCount
-      ) +
-
-      '名 / 小学生 ' +
-
-      escapeHtml(
-        data.childCount
-      ) +
-
-      '名<br>' +
-
-
-      '<strong>請求額：</strong>￥' +
-
-      escapeHtml(
-        data.totalAmount
-      ) +
-
-      '-' +
-
-      '</div>' +
-
-      status +
-
-      button +
-
-      '</div>';
-
-
-    const checkinBtn =
-      document.getElementById(
-        'checkinBtn'
-      );
-
-
-    if (
-      checkinBtn
-    ) {
-
-      checkinBtn.addEventListener(
-        'click',
-        function () {
-
-          executeCheckin(
-            data.code
-          );
-
-        }
-      );
-    }
-  }
-
-
-  function executeCheckin(
-    code
-  ) {
-
-    const staffInfo =
-      getStaffInfo();
-
-
-    if (!staffInfo) {
-      return;
-    }
-
-
-    showLoading(
-      '受付登録中...'
-    );
-
-
-    jsonpRequest(
-      {
-
-        action:
-          'checkin',
-
-        code:
-          code,
-
-        staff:
-          staffInfo.staff,
-
-        pin:
-          staffInfo.pin
-
-      },
-
-      function (
-        response
-      ) {
-
-        if (
-          !response ||
-          response.ok !== true
-        ) {
-
-          showError(
-            response &&
-            response.message
-              ?
-              response.message
-              :
-              '受付登録に失敗しました。'
-          );
-
-          return;
-        }
-
-
-        if (
-          response.alreadyCheckedIn
-        ) {
-
-          document
-            .getElementById(
-              'resultArea'
-            )
-            .innerHTML =
-
-            '<div class="card">' +
-
-            '<div class="result-box checked">' +
-
-            '⚠️ 既に受付済みです<br>' +
-
-            escapeHtml(
-              response.name
-            ) +
-
-            ' 様<br>' +
-
-            '受付時刻：' +
-
-            escapeHtml(
-              response.checkinTime || ''
-            ) +
-
-            '</div>' +
-
-            '</div>';
-
-        }
-
-        else {
-
-          document
-            .getElementById(
-              'resultArea'
-            )
-            .innerHTML =
-
-            '<div class="card" style="text-align:center;">' +
-
-            '<h2 style="color:#198754;">' +
-
-            '✅ 受付完了' +
-
-            '</h2>' +
-
-            '<p style="font-size:20px;font-weight:700;">' +
-
-            escapeHtml(
-              response.name
-            ) +
-
-            ' 様' +
-
-            '</p>' +
-
-            '<p>' +
-
-            '対応：' +
-
-            escapeHtml(
-              response.staff
-            ) +
-
-            '</p>' +
-
-            '</div>';
-        }
-
-      }
-    );
-  }
-
-
-  function showLoading(
-    text
-  ) {
-
-    document
-      .getElementById(
-        'resultArea'
-      )
-      .innerHTML =
-
-      '<div class="card loading">' +
-
-      escapeHtml(
-        text
-      ) +
-
-      '</div>';
-  }
-
-
-  function showError(
-    message
-  ) {
-
-    document
-      .getElementById(
-        'resultArea'
-      )
-      .innerHTML =
-
-      '<div class="card error">' +
-
-      '<strong>エラー</strong><br><br>' +
-
-      escapeHtml(
-        message
-      ) +
-
-      '</div>';
-  }
+}
 
 </script>
 
+
 </body>
+
 </html>
