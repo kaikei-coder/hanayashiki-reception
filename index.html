@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -11,479 +9,282 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>
-    花やしき受付
-  </title>
-
+  <title>花やしき受付</title>
 
   <script
     src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js">
   </script>
 
-
   <style>
 
     body {
-
       margin: 0;
       padding: 0;
-
       font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-
-      background:
-        #f5f5f5;
-
-      color:
-        #222;
-
+      background: #f5f5f5;
+      color: #222;
     }
-
 
     .container {
-
-      max-width:
-        700px;
-
-      margin:
-        0 auto;
-
-      padding:
-        16px;
-
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 16px;
     }
-
 
     h1 {
-
-      text-align:
-        center;
-
-      font-size:
-        24px;
-
-      margin-bottom:
-        20px;
-
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
     }
-
 
     .box {
-
-      background:
-        white;
-
-      border-radius:
-        12px;
-
-      padding:
-        16px;
-
-      margin-bottom:
-        16px;
-
-      box-shadow:
-        0 2px 8px
-        rgba(0,0,0,0.08);
-
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
-
 
     label {
-
-      display:
-        block;
-
-      font-weight:
-        bold;
-
-      margin-top:
-        12px;
-
-      margin-bottom:
-        5px;
-
+      display: block;
+      font-weight: bold;
+      margin-top: 12px;
+      margin-bottom: 5px;
     }
-
 
     input,
     textarea,
+    select,
     button {
-
-      box-sizing:
-        border-box;
-
-      width:
-        100%;
-
-      font-size:
-        16px;
-
+      box-sizing: border-box;
+      width: 100%;
+      font-size: 16px;
     }
-
 
     input,
-    textarea {
-
-      padding:
-        12px;
-
-      border:
-        1px solid #ccc;
-
-      border-radius:
-        8px;
-
+    textarea,
+    select {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: white;
     }
-
 
     button {
-
-      border:
-        none;
-
-      border-radius:
-        9px;
-
-      padding:
-        14px;
-
-      font-weight:
-        bold;
-
-      cursor:
-        pointer;
-
-      margin-top:
-        10px;
-
+      border: none;
+      border-radius: 9px;
+      padding: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
     }
-
 
     .primary {
-
-      background:
-        #222;
-
-      color:
-        white;
-
+      background: #222;
+      color: white;
     }
-
 
     .secondary {
-
-      background:
-        #e8e8e8;
-
-      color:
-        #222;
-
+      background: #e8e8e8;
+      color: #222;
     }
-
 
     .success {
-
-      background:
-        #198754;
-
-      color:
-        white;
-
+      background: #198754;
+      color: white;
+      font-size: 18px;
+      padding: 17px;
     }
-
 
     .status {
-
-      padding:
-        12px;
-
-      border-radius:
-        8px;
-
-      margin:
-        10px 0;
-
-      font-weight:
-        bold;
-
+      padding: 12px;
+      border-radius: 8px;
+      margin: 10px 0;
+      font-weight: bold;
     }
-
 
     .paid {
-
-      background:
-        #e5f6ec;
-
-      color:
-        #126a3b;
-
+      background: #e5f6ec;
+      color: #126a3b;
     }
-
 
     .unpaid {
-
-      background:
-        #fde7e7;
-
-      color:
-        #a41313;
-
+      background: #fde7e7;
+      color: #a41313;
     }
-
 
     .cancelled {
-
-      background:
-        #fde7e7;
-
-      color:
-        #a41313;
-
+      background: #fde7e7;
+      color: #a41313;
     }
-
 
     .partial {
-
-      background:
-        #fff5d7;
-
-      color:
-        #755300;
-
+      background: #fff5d7;
+      color: #755300;
     }
-
 
     .over {
-
-      background:
-        #ffecd5;
-
-      color:
-        #914600;
-
+      background: #ffecd5;
+      color: #914600;
     }
-
 
     .complete {
-
-      background:
-        #e5f6ec;
-
-      color:
-        #126a3b;
-
+      background: #e5f6ec;
+      color: #126a3b;
     }
-
 
     .result-card {
-
-      background:
-        white;
-
-      border:
-        2px solid #ddd;
-
-      border-radius:
-        12px;
-
-      padding:
-        16px;
-
-      margin-bottom:
-        16px;
-
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
     }
-
 
     .name {
-
-      font-size:
-        23px;
-
-      font-weight:
-        bold;
-
-      margin-bottom:
-        8px;
-
+      font-size: 23px;
+      font-weight: bold;
+      margin-bottom: 8px;
     }
-
 
     .small {
-
-      font-size:
-        13px;
-
-      color:
-        #666;
-
+      font-size: 13px;
+      color: #666;
     }
-
 
     .section-title {
-
-      font-weight:
-        bold;
-
-      margin-top:
-        18px;
-
-      margin-bottom:
-        7px;
-
+      font-weight: bold;
+      margin-top: 18px;
+      margin-bottom: 7px;
     }
-
 
     .count-grid {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap:
-        7px;
-
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
     }
-
 
     .count-box {
-
-      background:
-        #f5f5f5;
-
-      border-radius:
-        8px;
-
-      padding:
-        10px 5px;
-
-      text-align:
-        center;
-
-      font-size:
-        13px;
-
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 10px 5px;
+      text-align: center;
+      font-size: 13px;
     }
-
 
     .count-number {
-
-      font-size:
-        23px;
-
-      font-weight:
-        bold;
-
-      margin-top:
-        3px;
-
+      font-size: 23px;
+      font-weight: bold;
+      margin-top: 3px;
     }
 
+    /*
+      ==========================================================
+      今回来場人数の選択欄
+      iPhoneではタップすると標準のホイール式ピッカーが開きます
+      ==========================================================
+    */
 
     .entry-grid {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap:
-        8px;
-
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
     }
 
-
-    .entry-grid label {
-
-      font-size:
-        13px;
-
-      text-align:
-        center;
-
+    .entry-item {
+      text-align: center;
     }
 
+    .entry-item label {
+      font-size: 14px;
+      text-align: center;
+      margin-top: 4px;
+      margin-bottom: 7px;
+    }
+
+    .number-picker {
+      width: 100%;
+      height: 58px;
+      padding: 6px 8px;
+      border: 2px solid #aaa;
+      border-radius: 10px;
+      background: #fff;
+      font-size: 25px;
+      font-weight: bold;
+      text-align: center;
+      text-align-last: center;
+      appearance: auto;
+      -webkit-appearance: menulist;
+    }
+
+    .picker-help {
+      margin-top: 10px;
+      padding: 9px;
+      background: #f4f4f4;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+    }
+
+    .remaining-default {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+    }
 
     #reader {
-
-      width:
-        100%;
-
-      margin-top:
-        12px;
-
+      width: 100%;
+      margin-top: 12px;
     }
-
 
     .message {
-
-      text-align:
-        center;
-
-      padding:
-        12px;
-
-      font-weight:
-        bold;
-
+      text-align: center;
+      padding: 12px;
+      font-weight: bold;
     }
-
 
     hr {
-
-      border:
-        none;
-
-      border-top:
-        1px solid #ddd;
-
-      margin:
-        18px 0;
-
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 18px 0;
     }
 
-
-    @media
-    (max-width: 480px) {
+    @media (max-width: 480px) {
 
       .count-box {
-
-        font-size:
-          12px;
-
+        font-size: 12px;
       }
 
-
       .count-number {
+        font-size: 21px;
+      }
 
-        font-size:
-          21px;
+      .number-picker {
+        font-size: 24px;
+        height: 60px;
+      }
 
+      .entry-grid {
+        gap: 6px;
       }
 
     }
 
   </style>
-
 </head>
 
 
 <body>
 
-
 <div class="container">
 
-
-  <h1>
-    花やしき 当日受付
-  </h1>
+  <h1>花やしき 当日受付</h1>
 
 
   <!-- ======================================================
@@ -496,18 +297,15 @@
       受付担当者
     </label>
 
-
     <input
       id="staff"
       type="text"
       placeholder="例：張﨑"
     >
 
-
     <label for="pin">
       スタッフPIN
     </label>
-
 
     <input
       id="pin"
@@ -520,7 +318,7 @@
 
 
   <!-- ======================================================
-       QR
+       QRコード
        ====================================================== -->
 
   <div class="box">
@@ -532,14 +330,12 @@
       QRコードを読み取る
     </button>
 
-
     <button
       class="secondary"
       onclick="stopCamera()"
     >
       カメラを停止
     </button>
-
 
     <div id="reader"></div>
 
@@ -556,13 +352,11 @@
       QRコードがない場合
     </label>
 
-
     <input
       id="searchInput"
       type="text"
       placeholder="氏名・フリガナ・受付番号"
     >
-
 
     <button
       class="primary"
@@ -579,9 +373,7 @@
     class="message"
   ></div>
 
-
   <div id="results"></div>
-
 
 </div>
 
@@ -597,7 +389,6 @@ const API_URL =
 
 
 let html5QrCode = null;
-
 let cameraRunning = false;
 
 
@@ -613,18 +404,13 @@ function getStaffInfo() {
 
   const staff =
     document
-      .getElementById(
-        'staff'
-      )
+      .getElementById('staff')
       .value
       .trim();
 
-
   const pin =
     document
-      .getElementById(
-        'pin'
-      )
+      .getElementById('pin')
       .value
       .trim();
 
@@ -636,7 +422,6 @@ function getStaffInfo() {
     );
 
     return null;
-
   }
 
 
@@ -647,18 +432,12 @@ function getStaffInfo() {
     );
 
     return null;
-
   }
 
 
   return {
-
-    staff:
-      staff,
-
-    pin:
-      pin
-
+    staff: staff,
+    pin: pin
   };
 
 }
@@ -673,20 +452,13 @@ async function startCamera() {
   const info =
     getStaffInfo();
 
-
   if (!info) {
-
     return;
-
   }
 
 
-  if (
-    cameraRunning
-  ) {
-
+  if (cameraRunning) {
     return;
-
   }
 
 
@@ -701,22 +473,15 @@ async function startCamera() {
     await html5QrCode.start(
 
       {
-        facingMode:
-          'environment'
+        facingMode: 'environment'
       },
 
       {
-        fps:
-          10,
+        fps: 10,
 
         qrbox: {
-
-          width:
-            250,
-
-          height:
-            250
-
+          width: 250,
+          height: 250
         }
       },
 
@@ -725,20 +490,18 @@ async function startCamera() {
     );
 
 
-    cameraRunning =
-      true;
+    cameraRunning = true;
 
 
     showMessage(
       'QRコードをカメラにかざしてください。'
     );
 
+  }
 
-  } catch (err) {
+  catch (err) {
 
-    cameraRunning =
-      false;
-
+    cameraRunning = false;
 
     alert(
       'カメラを開始できませんでした。\n' +
@@ -760,21 +523,18 @@ async function stopCamera() {
     !html5QrCode ||
     !cameraRunning
   ) {
-
     return;
-
   }
 
 
   try {
-
     await html5QrCode.stop();
+  }
 
-  } catch (e) {}
+  catch (e) {}
 
 
-  cameraRunning =
-    false;
+  cameraRunning = false;
 
 }
 
@@ -811,19 +571,14 @@ function manualSearch() {
   const info =
     getStaffInfo();
 
-
   if (!info) {
-
     return;
-
   }
 
 
   const query =
     document
-      .getElementById(
-        'searchInput'
-      )
+      .getElementById('searchInput')
       .value
       .trim();
 
@@ -835,7 +590,6 @@ function manualSearch() {
     );
 
     return;
-
   }
 
 
@@ -857,20 +611,14 @@ function searchParticipant(
   const info =
     getStaffInfo();
 
-
   if (!info) {
-
     return;
-
   }
 
 
   document
-    .getElementById(
-      'results'
-    )
-    .innerHTML =
-      '';
+    .getElementById('results')
+    .innerHTML = '';
 
 
   showMessage(
@@ -881,16 +629,9 @@ function searchParticipant(
   jsonp(
 
     {
-
-      action:
-        'search',
-
-      query:
-        query,
-
-      pin:
-        info.pin
-
+      action: 'search',
+      query: query,
+      pin: info.pin
     },
 
 
@@ -904,7 +645,6 @@ function searchParticipant(
         );
 
         return;
-
       }
 
 
@@ -918,14 +658,10 @@ function searchParticipant(
         );
 
         return;
-
       }
 
 
-      showMessage(
-        ''
-      );
-
+      showMessage('');
 
       renderResults(
         data.results
@@ -934,6 +670,56 @@ function searchParticipant(
     }
 
   );
+
+}
+
+
+// ============================================================
+// 人数選択肢を作る
+// 0～50まで選択可能
+// ============================================================
+
+function makeNumberOptions(
+  selectedValue
+) {
+
+  let html = '';
+
+  let selected =
+    Number(selectedValue || 0);
+
+
+  if (
+    selected < 0 ||
+    !Number.isInteger(selected)
+  ) {
+    selected = 0;
+  }
+
+
+  for (
+    let i = 0;
+    i <= 50;
+    i++
+  ) {
+
+    html +=
+      '<option value="' +
+      i +
+      '"' +
+      (
+        i === selected
+          ? ' selected'
+          : ''
+      ) +
+      '>' +
+      i +
+      '</option>';
+
+  }
+
+
+  return html;
 
 }
 
@@ -948,20 +734,16 @@ function renderResults(
 
   const area =
     document
-      .getElementById(
-        'results'
-      );
+      .getElementById('results');
 
 
-  area.innerHTML =
-    '';
+  area.innerHTML = '';
 
 
   results.forEach(
     function(p) {
 
-      participantCache[p.code] =
-        p;
+      participantCache[p.code] = p;
 
 
       const card =
@@ -978,13 +760,11 @@ function renderResults(
       // 入金状況
       // ====================================================
 
-      let paymentHtml =
-        '';
+      let paymentHtml = '';
 
 
       if (
-        p.paymentStatus ===
-        '済'
+        p.paymentStatus === '済'
       ) {
 
         paymentHtml =
@@ -1064,6 +844,52 @@ function renderResults(
       const safeCode =
         escapeHtml(
           p.code
+        );
+
+
+      /*
+        ======================================================
+        今回来場人数の初期値
+
+        原則：
+        「まだ来ていない残人数」を最初から選択
+
+        例：
+        申込 大人2、小学生1
+        まだ0人受付
+        ↓
+        大人2、小学生1 が最初から選択済み
+
+        すでに大人1人受付済みなら
+        ↓
+        大人1、小学生1 が最初から選択済み
+        ======================================================
+      */
+
+      const defaultAdult =
+        Math.max(
+          0,
+          Number(
+            p.remainingAdult || 0
+          )
+        );
+
+
+      const defaultElementary =
+        Math.max(
+          0,
+          Number(
+            p.remainingElementary || 0
+          )
+        );
+
+
+      const defaultPreschool =
+        Math.max(
+          0,
+          Number(
+            p.remainingPreschool || 0
+          )
         );
 
 
@@ -1190,7 +1016,7 @@ function renderResults(
 
 
         <!-- ================================================
-             残人数
+             申込残数
              ================================================ -->
 
         <div class="section-title">
@@ -1241,7 +1067,9 @@ function renderResults(
             p.overElementary > 0 ||
             p.overPreschool > 0
           )
+
           ?
+
           `
 
           <div class="status over">
@@ -1266,7 +1094,9 @@ function renderResults(
           </div>
 
           `
+
           :
+
           ''
         }
 
@@ -1307,81 +1137,74 @@ function renderResults(
           <div class="entry-grid">
 
 
-            <div>
+            <div class="entry-item">
 
               <label>
                 大人
               </label>
 
-              <input
-
+              <select
                 id="adult_${safeCode}"
-
-                type="number"
-
-                min="0"
-
-                max="50"
-
-                value="0"
-
-                inputmode="numeric"
-
+                class="number-picker"
+                aria-label="今回来場した大人の人数"
               >
+                ${makeNumberOptions(
+                  defaultAdult
+                )}
+              </select>
 
             </div>
 
 
-            <div>
+            <div class="entry-item">
 
               <label>
                 小学生
               </label>
 
-              <input
-
+              <select
                 id="elementary_${safeCode}"
-
-                type="number"
-
-                min="0"
-
-                max="50"
-
-                value="0"
-
-                inputmode="numeric"
-
+                class="number-picker"
+                aria-label="今回来場した小学生の人数"
               >
+                ${makeNumberOptions(
+                  defaultElementary
+                )}
+              </select>
 
             </div>
 
 
-            <div>
+            <div class="entry-item">
 
               <label>
                 未就学児
               </label>
 
-              <input
-
+              <select
                 id="preschool_${safeCode}"
-
-                type="number"
-
-                min="0"
-
-                max="50"
-
-                value="0"
-
-                inputmode="numeric"
-
+                class="number-picker"
+                aria-label="今回来場した未就学児の人数"
               >
+                ${makeNumberOptions(
+                  defaultPreschool
+                )}
+              </select>
 
             </div>
 
 
+          </div>
+
+
+          <div class="picker-help">
+            人数を変更する場合は、
+            数字をタップして選択してください。
+          </div>
+
+
+          <div class="remaining-default">
+            ※ 最初から「申込残数」が選択されています
           </div>
 
 
@@ -1391,24 +1214,17 @@ function renderResults(
 
 
           <input
-
             id="note_${safeCode}"
-
             type="text"
-
             placeholder="例：同行者2名は後から来場"
-
           >
 
 
           <button
-
             class="success"
-
             onclick="prepareCheckin(
               '${safeCode}'
             )"
-
           >
 
             今回分を受付する
@@ -1452,7 +1268,6 @@ function prepareCheckin(
     );
 
     return;
-
   }
 
 
@@ -1513,11 +1328,10 @@ function prepareCheckin(
   ) {
 
     alert(
-      '今回入場する人数を入力してください。'
+      '今回入場する人数を選択してください。'
     );
 
     return;
-
   }
 
 
@@ -1543,11 +1357,10 @@ function prepareCheckin(
     ) {
 
       alert(
-        '人数は0以上の整数で入力してください。'
+        '人数は0以上の整数で選択してください。'
       );
 
       return;
-
     }
 
   }
@@ -1593,9 +1406,7 @@ function executeCheckin(
 
 
   if (!info) {
-
     return;
-
   }
 
 
@@ -1730,8 +1541,7 @@ function executeCheckin(
           }
 
 
-          msg +=
-            '\n';
+          msg += '\n';
 
         }
 
@@ -1753,7 +1563,6 @@ function executeCheckin(
           );
 
           return;
-
         }
 
 
@@ -1778,7 +1587,6 @@ function executeCheckin(
 
 
         return;
-
       }
 
 
@@ -1796,7 +1604,6 @@ function executeCheckin(
 
 
         return;
-
       }
 
 
@@ -2099,7 +1906,5 @@ function escapeHtml(
 
 </script>
 
-
 </body>
-
 </html>
